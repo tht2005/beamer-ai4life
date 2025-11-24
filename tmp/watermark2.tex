@@ -1,0 +1,30 @@
+\documentclass[varwidth=true,border=2mm]{standalone}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{calc}
+
+\definecolor{ai4life}{RGB}{50,130,160}
+
+\begin{document}
+\begin{tikzpicture}
+    % Explicit bounding box (ensures fixed PDF size)
+    \useasboundingbox (-7,-5) rectangle (7,5);
+
+    % Decorative AI nodes (grid style)
+    \foreach \x in {-6,-4,-2,0,2,4,6}
+      \foreach \y in {-4,-2,0,2,4}
+        \fill[ai4life!10] (\x,\y) circle (0.15);
+
+    % Central circle
+    \draw[ai4life!30, line width=2pt] (0,0) circle (3.2);
+
+    % Triangle AI motif
+    \draw[ai4life!25] (-3,2) -- (3,2) -- (0,-3.5) -- cycle;
+
+	\node[opacity=0.3, rotate=30] at (0, -0.2) {
+		\includegraphics[width=0.6\paperwidth]{./AI4LIFE_logo.png}
+	};
+
+\end{tikzpicture}
+\end{document}
+

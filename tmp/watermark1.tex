@@ -1,0 +1,61 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage[paperwidth=32cm,paperheight=18cm]{geometry} % 16:9 ratio
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usetikzlibrary{calc,decorations.pathmorphing}
+
+\definecolor{ai4life}{RGB}{50,130,160}
+
+\begin{document}
+\begin{tikzpicture}
+
+% Page center
+\coordinate (C) at (0,0);
+
+% ------------------------------
+% Neural network offset to upper-left, more left
+\coordinate (NNshift) at (-13cm,4cm);
+
+% Connections (input -> hidden)
+\foreach \a in {-2,-1,0,1,2} 
+  \foreach \b in {-2,-1,0,1,2,3} 
+    \draw[ai4life!30,opacity=0.3] 
+      ($ (NNshift) + (-3cm,\a cm) $) -- ($ (NNshift) + (0,\b cm) $);
+
+% Connections (hidden -> output)
+\foreach \a in {-2,-1,0,1,2,3} 
+  \foreach \b in {-2,-1,0,1,2} 
+    \draw[ai4life!30,opacity=0.3] 
+      ($ (NNshift) + (0,\a cm) $) -- ($ (NNshift) + (3cm,\b cm) $);
+
+% Neural network nodes (input layer)
+\foreach \y in {-2,-1,0,1,2} 
+  \node[circle,minimum size=6mm,draw=ai4life!50,fill=ai4life!10,opacity=0.3] 
+  at ($ (NNshift) + (-3cm,\y cm) $) {};
+
+% Hidden layer
+\foreach \y in {-2,-1,0,1,2,3} 
+  \node[circle,minimum size=6mm,draw=ai4life!50,fill=ai4life!10,opacity=0.3] 
+  at ($ (NNshift) + (0,\y cm) $) {};
+
+% Output layer
+\foreach \y in {-2,-1,0,1,2} 
+  \node[circle,minimum size=6mm,draw=ai4life!50,fill=ai4life!10,opacity=0.3] 
+  at ($ (NNshift) + (3cm,\y cm) $) {};
+
+% ------------------------------
+% Faded logo overlay (center)
+\node[opacity=0.08, rotate=30] at (C) {
+    \includegraphics[width=0.6\paperwidth]{./AI4LIFE_logo.png}
+};
+
+% ------------------------------
+% Decorative sine curve (bottom-right)
+% \begin{scope}[shift={(10cm,-6cm)}] 
+%     \draw[ai4life!40,thick,decorate,decoration={snake,amplitude=0.2cm,segment length=0.5cm}]
+%         plot[smooth,domain=0:5,samples=100] (\x,{0.5*sin(\x r)});
+% \end{scope}
+
+\end{tikzpicture}
+\end{document}
+
