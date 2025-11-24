@@ -1,0 +1,32 @@
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\definecolor{color1}{HTML}{46A0B4}
+\definecolor{color2}{HTML}{3C8CAA}
+
+% Remove headers, footers, navigation symbols
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{headline}{}
+
+% Background canvas with watermark logo
+\setbeamertemplate{background canvas}{
+	\begin{tikzpicture}[remember picture, overlay]
+		\node[opacity=0.15, rotate=45] at (current page.center) {
+
+			\includegraphics[width=0.8\paperwidth]{./AI4LIFE_logo.png}
+		};
+	\end{tikzpicture}
+}
+
+\begin{document}
+
+% Use [plain] to avoid Beamer decorations
+\begin{frame}[plain]
+  % Add an invisible character to ensure the frame is generated
+  \mbox{}
+\end{frame}
+
+\end{document}
+
