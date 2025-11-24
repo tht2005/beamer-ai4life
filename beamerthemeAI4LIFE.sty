@@ -8,22 +8,59 @@
 \mode<presentation>
 
 % \RequirePackage{xcolor}
-% \RequirePackage{tikz}
+\RequirePackage{tikz}
+\RequirePackage{xkeyval}
 % \RequirePackage{graphicx}
 
 \ProcessOptionsBeamer
 
 \xdefinecolor{ai4life}{RGB}{50, 130, 160}
-\DeclareOption{watermark}{
+\DeclareOptionX{watermark}{
 	\setbeamertemplate{background}{
 		\includegraphics[width=1\paperwidth,height=\paperheight]{res-ai4life/watermark1.pdf}
 		% \includegraphics{res-ai4life/watermark1.pdf}
 	}
 }
-\ProcessOptions\relax
 
-% \useoutertheme[footline=authorinstitutetitle,subsection=false]{smoothbars}
-% \useoutertheme{miniframes}
+\DeclareOptionX{titleimage}{\def\@titleimage{#1}}
+\DeclareOptionX{logoimage}{\def\@logoimage{#1}}
+
+\ProcessOptionsX\relax
+
+\defbeamertemplate*{title page}{ai4life}[1][]{
+	\ifdefined\@titleimage
+	\else
+		\def\@titleimage{res-ai4life/banner_2020_kit.jpg}
+	\fi
+	\ifdefined\@logoimage
+	\else
+		\def\@logoimage{res-ai4life/AI4LIFE_logo.png}
+	\fi
+
+	\vspace{10pt}
+
+	\includegraphics[height=.08\paperheight]{\@logoimage}
+
+	\vspace{10pt}
+
+	{\usebeamerfont{title}\color{black}\fontsize{16pt}{18pt}\bfseries\inserttitle\par}
+
+	\vspace{10pt}
+
+	{\usebeamerfont{subtitle}\color{black}\bfseries\insertsubtitle\par}
+
+	{\usebeamerfont{author}\color{black}\normalsize\insertauthor} |
+	{\usebeamerfont{date}\color{black}\normalsize\insertdate\par}
+
+	\vbox to 0.5\paperheight{}
+    \vspace{0pt} % optional spacing
+
+	\begin{tikzpicture}[remember picture,overlay]
+		\node[anchor=south]
+			at (current page.south) 
+			{\includegraphics[width=0.98\paperwidth,height=0.5\paperheight]{\@titleimage}};
+	\end{tikzpicture}
+}
 
 \makeatletter 
 \newcommand{\frameofframes}{/}
@@ -33,6 +70,7 @@
 	\begin{beamercolorbox}[wd=\paperwidth,ht=2pt,dp=0pt]{palette tertiary}
 		\rule{\dimexpr\paperwidth*\insertframenumber/\inserttotalframenumber\relax}{2pt}%
 	\end{beamercolorbox}%
+
 	\leavevmode%
 	\hbox{%
 		\begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1.125ex,center]{title in head/foot}%
@@ -73,9 +111,12 @@
 
 %% try
 % setting the color of block, example and alerted
-\setbeamercolor{block title}{bg=ai4life,fg=white}
-\setbeamercolor{block title alerted}{use = alerted text, fg = white, bg = ai4life}
-\setbeamercolor{block title example}{use={normal text,example text},bg=white,fg=ai4life}
+\setbeamercolor{block title}{bg=ai4life, fg=white}
+\setbeamercolor{block body}{bg=ai4life!15, fg=black}
+\setbeamercolor{block title alerted}{bg=red!70, fg=white}
+\setbeamercolor{block body alerted}{bg=red!15, fg=black}
+\setbeamercolor{block title example}{bg=teal!40, fg=white}
+\setbeamercolor{block body example}{bg=teal!10, fg=black}
 \setbeamercolor{fine separation line}{}
 \setbeamercolor{item projected}{fg=white}
 \setbeamercolor{palette sidebar primary}{use=normal text,fg=normal text.fg}
