@@ -22,12 +22,17 @@
 }
 \ProcessOptions\relax
 
-\useoutertheme[footline=authorinstitutetitle,subsection=false]{smoothbars}
+% \useoutertheme[footline=authorinstitutetitle,subsection=false]{smoothbars}
+% \useoutertheme{miniframes}
+
 \makeatletter 
 \newcommand{\frameofframes}{/}
 \newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
 % author | data | title | number
 \defbeamertemplate*{footline}{ai4life_beamer}{%
+	\begin{beamercolorbox}[wd=\paperwidth,ht=2pt,dp=0pt]{palette tertiary}
+		\rule{\dimexpr\paperwidth*\insertframenumber/\inserttotalframenumber\relax}{2pt}%
+	\end{beamercolorbox}%
 	\leavevmode%
 	\hbox{%
 		\begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1.125ex,center]{title in head/foot}%
