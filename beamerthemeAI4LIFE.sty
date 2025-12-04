@@ -9,8 +9,18 @@
 
 % \RequirePackage{xcolor}
 \RequirePackage{tikz}
+\usepackage{tikzpagenodes}
+
 \RequirePackage{xkeyval}
 % \RequirePackage{graphicx}
+
+\RequirePackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ai4life,
+    urlcolor=ai4life,
+    citecolor=ai4life
+}
 
 \ProcessOptionsBeamer
 
@@ -56,9 +66,9 @@
     \vspace{0pt} % optional spacing
 
 	\begin{tikzpicture}[remember picture,overlay]
-		\node[anchor=south]
-			at (current page.south) 
-			{\includegraphics[width=0.98\paperwidth,height=0.5\paperheight]{\@titleimage}};
+		\node[anchor=south, rounded corners, inner sep=1.5pt, draw]
+			at (current page text area.south) 
+			{\includegraphics[width=0.96\paperwidth,height=0.5\paperheight]{\@titleimage}};
 	\end{tikzpicture}
 }
 
